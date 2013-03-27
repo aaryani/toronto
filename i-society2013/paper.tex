@@ -351,6 +351,63 @@
 % (Unless specifically asked to do so by the journal or conference you plan
 % to submit to, of course. )
 
+% ***Markup macros for proof-reading
+\usepackage{amssymb}
+\usepackage{comment}
+\usepackage{ifthen}
+\newboolean{showcomments}
+\setboolean{showcomments}{true}
+%\setboolean{showcomments}{false}
+
+\usepackage[normalem]{ulem} % for \sout
+\usepackage{xcolor}
+\newcommand{\ra}{$\rightarrow$}
+\newcommand{\ugh}[1]{\textcolor{brown}{\uwave{#1}}} % please rephrase
+\newcommand{\ins}[1]{\textcolor{blue}{\uline{#1}}} % please insert
+\newcommand{\del}[1]{\textcolor{red}{\sout{#1}}} % please delete
+\newcommand{\chg}[2]{\textcolor{red}{\sout{#1}}{\ra}\textcolor{blue}
+{\uline{#2}}} % please change
+\newcommand{\mlchg}[2]{\textcolor{gray}{\sout{#1}}{\ra}\textcolor{olive}{\uline{#2}}} % please change
+
+
+\ifthenelse{\boolean{showcomments}}
+{\newcommand{\nbc}[3]{
+ {\colorbox{#3}{\bfseries\sffamily\scriptsize\textcolor{white}{#1}}}
+ {\textcolor{#3}{\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}}}
+ \newcommand{\version}{\emph{\scriptsize\id}}}
+{\newcommand{\nbc}[3]{}
+ \renewcommand{\ugh}[1]{#1} % please rephrase
+ \renewcommand{\ins}[1]{#1} % please insert
+ \renewcommand{\del}[1]{#1} % please delete
+ \renewcommand{\chg}[2]{#2} % please change
+ \newcommand{\version}{}}
+\newcommand{\nb}[2]{\nbc{#1}{#2}{orange}}
+\newcommand{\here}{\yellowbox{$\Rightarrow$ CONTINUE HERE $\Leftarrow$}}
+\newcommand\rev[2]{\nb{TODO (rev #1)}{#2}} % reviewer comments
+\newcommand\fix[1]{\nb{FIX}{#1}}
+\newcommand\todo[1]{\nb{TO DO}{#1}}
+\newcommand\steve[1]{\nbc{SM}{#1}{olive}}
+\newcommand\amir[1]{\nbc{AA}{#1}{blue}}
+\newcommand\alex[1]{\nbc{AH}{#1}{lightgray}}
+\renewcommand{\labelitemi}{$\bullet$}
+\definecolor{myColor}{rgb}{0.9,0.9,0.9}
+
+
+
+
+%*** References
+\newcommand{\tabref}[1]{\hyperref[{tab:#1}]{Table~\ref*{tab:#1}}}
+\newcommand{\figref}[1]{\hyperref[{fig:#1}]{Fig.~\ref*{fig:#1}}}
+\newcommand{\secref}[1]{\hyperref[{sec:#1}]{Section~\ref*{sec:#1}}}
+\newcommand{\lstref}[1]{\hyperref[{lst:#1}]{Listing~\ref*{lst:#1}}}
+\newcommand{\defref}[1]{\hyperref[{def:#1}]{Definition~\ref*{def:#1}}}
+
+%*** Abbreviations
+\newcommand{\ie}{\emph{i.e.,}\xspace}
+\newcommand{\eg}{\emph{e.g.,}\xspace}
+\newcommand{\etc}{\emph{etc.}\xspace}
+\newcommand{\etal}{\emph{et al.}\xspace}
+
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor sous-veillance life-glogging}
@@ -416,8 +473,6 @@ amir.aryani@anu.edu.au
 %\IEEEspecialpapernotice{(Invited Paper)}
 
 
-
-
 % make the title area
 \maketitle
 
@@ -451,7 +506,42 @@ This paper demonstrates that although enabling open access to blogging data is a
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
+
+\section{Proof-reading commands}
+Please use the following latex commands for the proof readings:
+\begin{itemize}
+\item Leaving comments in the text  \amir{comment 1} \steve{comment 2} \alex{comment 3}
+\item \ins{insert a text}
+\item \ugh{mark to be revised}
+\item \del{delete a text}
+\item \chg{change text AAA to }{BBB}
+\item \todo{todo item}
+\end{itemize}
+
 \section{Introduction}
+
+\section{Glogger.mobi}
+
+\section{Access and Mediation}
+\todo {A discussion about accessibility of the data including private and public data. Mediated access here refers to having trained people at the interface of the data collections and potential users.}
+
+\section{Metadata and Standard Vocabularies}
+One of the keys to open data is describing them via effective metadata using standard vocabularies and related infrastructure.
+\todo{complete this section by looking at what kind of vocabularies or ontologies can be relevant to glogging.}
+
+\section{Digital Object Identifiers (DOI)}
+\todo{Effective tracking of data re-use enables the creators of the data sets to receive data citations, which, increasingly being recognised as legitimate research outputs.}
+
+\section {Privacy}
+\todo{A discussion about varies privacy issues related to glogging datasets.}
+
+\section {Data Management}
+\todo {An overview on current data management practices and how they can be related to glogging}
+
+\section {Licencing}
+\todo{A discussion about relevant open licences including creative common and how it can be applied to glogging datasets}
+
+\section {Discussion}
 
 \section{Conclusion}
 
